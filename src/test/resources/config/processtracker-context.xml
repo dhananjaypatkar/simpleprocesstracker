@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Define Process Tracker bean instance -->
+	<bean id="processTracker" class="org.dhananjay.siprotrack.impl.SimpleProcessTracker">
+		<property name="processDAO" ref="processDao"></property>
+	</bean>
+	<!-- Define DAO instance for persisting Process stages and state information -->
+	<bean id="processDao" class="org.dhananjay.siprotrack.impl.ProcessDAOImpl"></bean>
+	<!-- End  -->
+	
+	
+	<!-- Smaple Process Beans starts -->
+	<bean id="simpleProcess" class="org.dhananjay.siprotrack.SimpleProcess">
+		<property name="simpleProcessTracker" ref="processTracker"></property>
+		<property name="childProcess" ref="childProcess"></property>
+	</bean>
+	
+	<bean id="childProcess" class="org.dhananjay.siprotrack.ChildProcess">
+		<property name="processTracker" ref="processTracker"></property>
+	</bean>
+	
+</beans>
