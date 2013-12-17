@@ -20,6 +20,7 @@ public class SimpleProcess {
 		simpleProcessTracker.startProcess("My Simple Process");
 		System.out.println("Init of Simple Process");
 		stepOne();
+		simpleProcessTracker.endProcess();
 	}
 	
 	public void stepOne(){
